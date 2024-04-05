@@ -67,6 +67,7 @@ ax_st.XLabel.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
 ax_st.YLabel.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
 ax_st.ZLabel.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
 ax_st.Legend.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
+ax_st.Title.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
 
 
 % Type: line
@@ -122,7 +123,6 @@ for f = 1:length(figs)
                 for sfidx = 1:length(sf)
                     field1 = cell2mat(af(afidx));
                     field2 = cell2mat(sf(sfidx));
-                    
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     %%%% suppress the error about legend
                     %%%%
@@ -133,10 +133,12 @@ for f = 1:length(figs)
                         % (ax_st(style_num).(cell2mat(af(afidx)))==(Label or Legend).Interpreter‚Å
                         % ‚©‚Â
                         % iLabel or Legendj‚ª‘¶İ‚·‚éê‡
-                        if isempty(strfind(ax(a).(field1).String, '$$'))
-                            ax(a).(field1).(field2) = 'tex'; % $$‚ª‘¶İ‚µ‚È‚¢ê‡‚Ítex
-                        else
+                        latex_contain = strfind(ax(a).(field1).String, '$$','ForceCellOutput',true);
+                        latex_contain = cell2mat(latex_contain);
+                        if any(latex_contain)
                             ax(a).(field1).(field2) = ax_st.(cell2mat(af(afidx))).Interpreter;
+                        else
+                            ax(a).(field1).(field2) = 'none'; % $$‚ª‘¶İ‚µ‚È‚¢ê‡‚Ítex
                         end   
                     end
                     warning('on','MATLAB:handle_graphics:exceptions:SceneNode')
