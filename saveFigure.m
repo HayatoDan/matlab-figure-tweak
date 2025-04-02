@@ -46,11 +46,8 @@ disp(['''' filename ''''])
 %% Figure のサイズとページ サイズの指定
 
 fig.PaperPositionMode = 'auto';
-fig.Units = 'inches';             % Figureの単位をインチに設定
-pos = fig.PaperPosition;               % [左 下 幅 高さ] を取得
-fig.PaperUnits = 'inches';        % 印刷用の単位もインチに設定
-fig.PaperPosition = pos;          % Figureの位置とサイズをそのまま設定
-fig.PaperSize = [pos(3) pos(4)];   % 用紙サイズをFigureの幅と高さに合わせる
+fig_pos = fig.PaperPosition;
+fig.PaperSize = 1.01*[fig_pos(3) fig_pos(4)];
 %%% pdf,png,figを作成
 print(filename,'-dpdf');
 print(filename,'-dpng');
