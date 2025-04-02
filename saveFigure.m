@@ -12,12 +12,11 @@ if strcmp(options.AutoSave,'unabled')
         return
     end
 end
-    
 
-%% figure“Ç‚İ‚İ
+%% figureèª­ã¿è¾¼ã¿
 fig = gcf;
-%% Œ»İ‚Ìfigure‚ğpng,fig,pdf‚Å•Û‘¶
-if strcmp(filename,'') % ˆø”‚ğ–Y‚ê‚½‚çCmatlab_figure_yyyymmdd_hhmm[figure”Ô†]‚ğƒtƒ@ƒCƒ‹–¼‚Æ‚µ‚Äì¬
+%% ç¾åœ¨ã®figureã‚’png,fig,pdfã§ä¿å­˜
+if strcmp(filename,'') % å¼•æ•°ã‚’å¿˜ã‚ŒãŸã‚‰ï¼Œmatlab_figure_yyyymmdd_hhmm[figureç•ªå·]ã‚’ãƒ•ã‚¡ã‚¤ãƒ«åã¨ã—ã¦ä½œæˆ
     t = datetime('now');
     stamp = yyyymmdd(t);
     [h,m,~] = hms(t);
@@ -25,7 +24,7 @@ if strcmp(filename,'') % ˆø”‚ğ–Y‚ê‚½‚çCmatlab_figure_yyyymmdd_hhmm[figure”Ô†]
 end
 
 
-if filename(end) == '\' % ƒtƒ@ƒCƒ‹–¼‚ª\‚ÅI‚í‚Á‚Ä‚¢‚éiƒtƒHƒ‹ƒ_w’èj‚Ìê‡‚Í‚»‚ÌƒtƒHƒ‹ƒ_‚Étimestamp‚ğ•t‚¯‚Ä•Û‘¶
+if filename(end) == '\' % ãƒ•ã‚¡ã‚¤ãƒ«åãŒ\ã§çµ‚ã‚ã£ã¦ã„ã‚‹ï¼ˆãƒ•ã‚©ãƒ«ãƒ€æŒ‡å®šï¼‰ã®å ´åˆã¯ãã®ãƒ•ã‚©ãƒ«ãƒ€ã«timestampã‚’ä»˜ã‘ã¦ä¿å­˜
     t = datetime('now');
     stamp = yyyymmdd(t);
     [h,m,~] = hms(t);
@@ -35,7 +34,7 @@ end
 
 disp('saving as')
 disp(['''' filename ''''])
-%% Figure‚É‡‚í‚¹‚Ä²‚ğŠg’£
+%% Figureã«åˆã‚ã›ã¦è»¸ã‚’æ‹¡å¼µ
 % ax = gca;
 % outerpos = ax.OuterPosition;
 % ti = ax.TightInset; 
@@ -44,12 +43,15 @@ disp(['''' filename ''''])
 % ax_width = outerpos(3) - ti(1) - ti(3);
 % ax_height = outerpos(4) - ti(2) - ti(4);
 % ax.Position = [left bottom ax_width ax_height];
-%% Figure ‚ÌƒTƒCƒY‚Æƒy[ƒW ƒTƒCƒY‚Ìw’è
+%% Figure ã®ã‚µã‚¤ã‚ºã¨ãƒšãƒ¼ã‚¸ ã‚µã‚¤ã‚ºã®æŒ‡å®š
 
 fig.PaperPositionMode = 'auto';
-fig_pos = fig.PaperPosition;
-fig.PaperSize = [fig_pos(3) fig_pos(4)];
-%%% pdf,png,fig‚ğì¬
+fig.Units = 'inches';             % Figureã®å˜ä½ã‚’ã‚¤ãƒ³ãƒã«è¨­å®š
+pos = fig.PaperPosition;               % [å·¦ ä¸‹ å¹… é«˜ã•] ã‚’å–å¾—
+fig.PaperUnits = 'inches';        % å°åˆ·ç”¨ã®å˜ä½ã‚‚ã‚¤ãƒ³ãƒã«è¨­å®š
+fig.PaperPosition = pos;          % Figureã®ä½ç½®ã¨ã‚µã‚¤ã‚ºã‚’ãã®ã¾ã¾è¨­å®š
+fig.PaperSize = [pos(3) pos(4)];   % ç”¨ç´™ã‚µã‚¤ã‚ºã‚’Figureã®å¹…ã¨é«˜ã•ã«åˆã‚ã›ã‚‹
+%%% pdf,png,figã‚’ä½œæˆ
 print(filename,'-dpdf');
 print(filename,'-dpng');
 savefig(filename);
