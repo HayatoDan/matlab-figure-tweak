@@ -84,13 +84,13 @@ saveFigure('','AutoSave','enabled');
 ![matlab_figure_20240110_1017_01](https://github.com/HayatoDan/matlab-figure-tweak/assets/90384782/bd4e40f8-11f2-46f3-81b2-1f78a88eca2d)
 
 
-## saveFigure(savefoldername, savefilename, option)
-### savename
+## saveFigure(foldername, filename, option)
+### foldername, filename
 保存名を指定できる．
 何も指定しないとカレントディレクトリ内に'matlab_figure_yyyymmdd_hhmm_(figurenum).拡張子'で保存される．
 
 存在するディレクトリを指定すればそのディレクトリ下に保存してくれる．
-例えば`saveFigure('dir\')`とするとdirディレクトリ下に保存される．
+例えば`saveFigure("dir\")`とするとdirディレクトリ下に保存される．
 ### option
 #### AutoSave
 `saveFigure('','AutoSave','enabled')`でセーブするか確認せずに図を保存する．
