@@ -2,7 +2,7 @@ function saveFigure(foldername, filename, options)
     arguments
         foldername (1, :) string {mustBeFolder} = ".\"
         filename string = ""
-        options.AutoSave char {mustBeMember(options.AutoSave, {'unabled', 'enabled'})} = 'unabled'
+        options.AutoSave char {mustBeMember(options.AutoSave, {'yes', 'ask', 'no'})} = 'ask'
     end
 
     
@@ -21,13 +21,18 @@ function saveFigure(foldername, filename, options)
         fullfilename = fullfile(foldername, filename);
     end
 
-    if options.AutoSave == "unabled"        
+    if options.AutoSave == "ask"        
         fullfilenameEscaped = strrep(fullfilename, "\", "\\");
         saveflag = input(sprintf("Do you want to save the figure as \n %s  (y/n)\n",fullfilenameEscaped), 's');
         if saveflag ~= "y"
             disp('No save');
             return;
         end
+    end
+
+    if options.AutoSave == "no"
+        disp('No save');
+        return;
     end
 
     fprintf(" Saving as: %s \n", fullfilename)
