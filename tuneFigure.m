@@ -1,11 +1,10 @@
-function [] = tuneFigure(figs, style, custom_style)
+function [] = tuneFigure(figs, style, options)
 %RESHAPE_FIGURE figureの見た目を整える
 %
 %   tunefig(figs, style, custom_style)
 %       figs:           figure handle(matrix of figure handle)
 %       style:          style select('document', 'ppt', %/'custom'/%)
-%       custom_style:   書式設定がcustomの場合のみ手本を指定(cell配列)
-%                       custom_style = {fig_st, ax_st, ln_st}
+%       options:        styleにさらにカスタマイズを入れる場合のオプション
 %
 %   See also FIGURE, AXES, LINE
 
@@ -21,23 +20,21 @@ function [] = tuneFigure(figs, style, custom_style)
 
 arguments 
     figs (:,:) = gcf
-    style (1,:) char {mustBeMember(style,{'default','document', 'ppt', 'qiita', 'custom'})} = 'default'
-    custom_style (1,3) cell = cell(1,3)
+    style (1,:) char {mustBeMember(style,{'default','document', 'larger', 'bigger', 'ppt', 'qiita'})} = 'default'
+    options.Fig_st struct = struct([])
+    options.Ax_st struct = struct([])
+    options.Line_st struct = struct([])
+    options.width double = 640
+    options.height double = 400
 end
 
-%% 引数の確認
-if nargin <= 2 && strcmp(style,'custom')
-    error('custom_style is not defined');
-end
+
+validateattributes(figs, {'matlab.ui.Figure'}, {'vector'});
 validateattributes(figs, {'matlab.ui.Figure'}, {'vector'});
 
 %% 初期化
-% fig_st = struct([]);
-% ax_st  = struct([]);
-% ln_st  = struct([]);
-
-width  = 640;	% 8:5
-height = 400;
+width  = options.width;	% 8:5
+height = options.height;
 pt2cm = 2.54/72;
 
 %% デフォルト設定の作成
@@ -77,6 +74,16 @@ ln_st.LineWidth = 3;
 switch style
     case 'document'
         % ======= document ======
+    case 'larger'
+        % ======= larger ======
+        ax_st.FontSize= 28;
+        ln_st.LineWidth = 4;
+
+    case 'bigger'
+        % ======= bigger ======
+        ax_st.FontSize= 42;
+        ln_st.LineWidth = 5;
+
     case 'ppt'
         % ======= ppt =======
 %         fig_st.Color = 'none'; % 背景色のみ透明に
@@ -87,14 +94,28 @@ switch style
         ax_st.LineWidth = 2;   % 軸のライン幅変更
         ax_st.FontSize= 15;
         ln_st.LineWidth = 2;   % プロットのライン幅だけに変更
-    case 'custom'
-        fig_st = custom_style{1};
-        ax_st  = custom_style{2};
-        ln_st  = custom_style{3};
 end
        
    
-
+% カスタムスタイルでデフォルトの設定を上書き
+if ~isempty(options.Fig_st)
+    custom_fig_fields = fieldnames(options.Fig_st);
+    for i = 1:length(custom_fig_fields)
+        fig_st.(custom_fig_fields{i}) = options.Fig_st.(custom_fig_fields{i});
+    end
+end
+if ~isempty(options.Ax_st)
+    custom_ax_fields = fieldnames(options.Ax_st);
+    for i = 1:length(custom_ax_fields)
+        ax_st.(custom_ax_fields{i}) = options.Ax_st.(custom_ax_fields{i});
+    end
+end
+if ~isempty(options.Line_st)
+    custom_ln_fields = fieldnames(options.Line_st);
+    for i = 1:length(custom_ln_fields)
+        ln_st.(custom_ln_fields{i}) = options.Line_st.(custom_ln_fields{i});
+    end
+end
 
 
 %% 整形
