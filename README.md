@@ -32,7 +32,7 @@ saveFigure();
 実行するとコマンドウインドウに図をセーブするか聞かれるのでy/nで答える．
 
 # 使い方詳細
-## tuneFigure(figs,style,custom_style)
+## tuneFigure(figs,style,options)
 ### figs
 整えるfigure handleを指定．デフォルトでは`gcf`（現在のfigure）を渡している．
 
