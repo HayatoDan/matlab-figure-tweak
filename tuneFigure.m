@@ -1,10 +1,10 @@
 function [] = tuneFigure(figs, style, custom_style)
-%RESHAPE_FIGURE figure‚ÌŒ©‚½–Ú‚ğ®‚¦‚é
+%RESHAPE_FIGURE figureã®è¦‹ãŸç›®ã‚’æ•´ãˆã‚‹
 %
 %   tunefig(figs, style, custom_style)
 %       figs:           figure handle(matrix of figure handle)
 %       style:          style select('document', 'ppt', %/'custom'/%)
-%       custom_style:   ‘®İ’è‚ªcustom‚Ìê‡‚Ì‚İè–{‚ğw’è(cell”z—ñ)
+%       custom_style:   æ›¸å¼è¨­å®šãŒcustomã®å ´åˆã®ã¿æ‰‹æœ¬ã‚’æŒ‡å®š(cellé…åˆ—)
 %                       custom_style = {fig_st, ax_st, ln_st}
 %
 %   See also FIGURE, AXES, LINE
@@ -25,13 +25,13 @@ arguments
     custom_style (1,3) cell = cell(1,3)
 end
 
-%% ˆø”‚ÌŠm”F
+%% å¼•æ•°ã®ç¢ºèª
 if nargin <= 2 && strcmp(style,'custom')
     error('custom_style is not defined');
 end
 validateattributes(figs, {'matlab.ui.Figure'}, {'vector'});
 
-%% ‰Šú‰»
+%% åˆæœŸåŒ–
 % fig_st = struct([]);
 % ax_st  = struct([]);
 % ln_st  = struct([]);
@@ -40,10 +40,10 @@ width  = 640;	% 8:5
 height = 400;
 pt2cm = 2.54/72;
 
-%% ƒfƒtƒHƒ‹ƒgİ’è‚Ìì¬
+%% ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šã®ä½œæˆ
 % ======= default mode =======
 % Type: figure
-% fig_st.Color = 'w';  % ”wŒiFColor = ”’'w'
+% fig_st.Color = 'w';  % èƒŒæ™¯è‰²Color = ç™½'w'
 fig_st.PaperPosition = [0 0 pt2cm*width pt2cm*height];
 fig_st.PaperSize = [pt2cm*width pt2cm*height];
 
@@ -63,11 +63,11 @@ ax_st.FontName = 'Times';
 ax_st.FontSize= 20;
 ax_st.LabelFontSizeMultiplier= 1.2;
 
-ax_st.XLabel.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
-ax_st.YLabel.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
-ax_st.ZLabel.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
-ax_st.Legend.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
-ax_st.Title.Interpreter = 'latex'; % $$ $$‚ÅˆÍ‚í‚ê‚½•”•ª‚ğlatex‰ğß
+ax_st.XLabel.Interpreter = 'latex'; % $$ $$ã§å›²ã‚ã‚ŒãŸéƒ¨åˆ†ã‚’latexè§£é‡ˆ
+ax_st.YLabel.Interpreter = 'latex'; % $$ $$ã§å›²ã‚ã‚ŒãŸéƒ¨åˆ†ã‚’latexè§£é‡ˆ
+ax_st.ZLabel.Interpreter = 'latex'; % $$ $$ã§å›²ã‚ã‚ŒãŸéƒ¨åˆ†ã‚’latexè§£é‡ˆ
+ax_st.Legend.Interpreter = 'latex'; % $$ $$ã§å›²ã‚ã‚ŒãŸéƒ¨åˆ†ã‚’latexè§£é‡ˆ
+ax_st.Title.Interpreter = 'latex'; % $$ $$ã§å›²ã‚ã‚ŒãŸéƒ¨åˆ†ã‚’latexè§£é‡ˆ
 
 
 % Type: line
@@ -79,14 +79,14 @@ switch style
         % ======= document ======
     case 'ppt'
         % ======= ppt =======
-%         fig_st.Color = 'none'; % ”wŒiF‚Ì‚İ“§–¾‚É
+%         fig_st.Color = 'none'; % èƒŒæ™¯è‰²ã®ã¿é€æ˜ã«
         ax_st.FontSize= 36;
         ln_st.LineWidth = 5;
     case 'qiita'
         % ======= qiita =======
-        ax_st.LineWidth = 2;   % ²‚Ìƒ‰ƒCƒ“••ÏX
+        ax_st.LineWidth = 2;   % è»¸ã®ãƒ©ã‚¤ãƒ³å¹…å¤‰æ›´
         ax_st.FontSize= 15;
-        ln_st.LineWidth = 2;   % ƒvƒƒbƒg‚Ìƒ‰ƒCƒ“•‚¾‚¯‚É•ÏX
+        ln_st.LineWidth = 2;   % ãƒ—ãƒ­ãƒƒãƒˆã®ãƒ©ã‚¤ãƒ³å¹…ã ã‘ã«å¤‰æ›´
     case 'custom'
         fig_st = custom_style{1};
         ax_st  = custom_style{2};
@@ -97,7 +97,7 @@ end
 
 
 
-%% ®Œ`
+%% æ•´å½¢
 ff = fieldnames(fig_st);
 af = fieldnames(ax_st);
 lf = fieldnames(ln_st);
@@ -130,15 +130,15 @@ for f = 1:length(figs)
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     warning('off','MATLAB:handle_graphics:exceptions:SceneNode')
                     if strcmp(field2,'Interpreter')&&~isempty(ax(a).(field1))
-                        % (ax_st(style_num).(cell2mat(af(afidx)))==(Label or Legend).Interpreter‚Å
-                        % ‚©‚Â
-                        % iLabel or Legendj‚ª‘¶İ‚·‚éê‡
+                        % (ax_st(style_num).(cell2mat(af(afidx)))==(Label or Legend).Interpreterã§
+                        % ã‹ã¤
+                        % ï¼ˆLabel or Legendï¼‰ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
                         latex_contain = strfind(ax(a).(field1).String, '$$','ForceCellOutput',true);
                         latex_contain = cell2mat(latex_contain);
                         if any(latex_contain)
                             ax(a).(field1).(field2) = ax_st.(cell2mat(af(afidx))).Interpreter;
                         else
-                            ax(a).(field1).(field2) = 'none'; % $$‚ª‘¶İ‚µ‚È‚¢ê‡‚Ítex
+                            ax(a).(field1).(field2) = 'none'; % $$ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯tex
                         end   
                     end
                     warning('on','MATLAB:handle_graphics:exceptions:SceneNode')

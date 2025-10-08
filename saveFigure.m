@@ -8,9 +8,9 @@ function saveFigure(foldername, filename, options)
     
 
     fig = gcf;
-%% Œ»İ‚Ìfigure‚ğpng,fig,pdf‚Å•Û‘¶
+%% ç¾åœ¨ã®figureã‚’png,fig,pdfã§ä¿å­˜
 
-    % filename‚ª‹ó‚È‚çƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚Å•Û‘¶
+    % filenameãŒç©ºãªã‚‰ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã§ä¿å­˜
     if strcmp(filename, "")
         t = datetime('now');
         stamp = yyyymmdd(t);
