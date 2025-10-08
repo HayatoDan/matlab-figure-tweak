@@ -103,6 +103,6 @@ saveFigure('AutoSave','yes');
 `saveFigure("dir\","hoge")`とするとdirディレクトリ下にhoge.png, hoge.fig, hoge.pdfが保存される．
 ### option
 #### AutoSave
-`saveFigure('','AutoSave','yes')`でセーブするか確認せずに図を保存する．
+`saveFigure('AutoSave','yes')`でセーブするか確認せずに図を保存する．
 同名のファイルがある場合に上書きするので注意．
 
