@@ -5,7 +5,6 @@ function saveFigure(foldername, filename, options)
         options.AutoSave char {mustBeMember(options.AutoSave, {'yes', 'ask', 'no'})} = 'ask'
     end
 
-    
 
     fig = gcf;
 %% 現在のfigureをpng,fig,pdfで保存
@@ -36,13 +35,20 @@ function saveFigure(foldername, filename, options)
     end
 
     fprintf(" Saving as: %s \n", fullfilename)
+    
 
-    fig.PaperPositionMode = 'auto';
-    fig_pos = fig.PaperPosition;
-    fig.PaperSize = 1.01 * [fig_pos(3) fig_pos(4)];
-
-    print(fig, char(fullfilename), '-dpdf');
-    print(fig, char(fullfilename), '-dpng');
+    if isMATLABReleaseOlderThan("R2020a")
+        fig.PaperPositionMode = 'auto';
+        fig_pos = fig.PaperPosition;
+        fig.PaperSize = 1.0 * [fig_pos(3) fig_pos(4)];
+    
+    
+        print(fig, char(fullfilename), '-dpdf');
+        print(fig, char(fullfilename), '-dpng');
+    else
+        exportgraphics(fig, sprintf("%s.png",fullfilename))
+        exportgraphics(fig, sprintf("%s.pdf",fullfilename),'ContentType','vector')
+    end
     savefig(fig, char(fullfilename));
 end
 
