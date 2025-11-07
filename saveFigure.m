@@ -3,6 +3,7 @@ function saveFigure(foldername, filename, options)
         foldername (1, :) string {mustBeFolder} = ".\"
         filename string = ""
         options.AutoSave char {mustBeMember(options.AutoSave, {'yes', 'ask', 'no'})} = 'ask'
+        options.Regacy logical = false
     end
 
 
@@ -37,7 +38,7 @@ function saveFigure(foldername, filename, options)
     fprintf(" Saving as: %s \n", fullfilename)
     
 
-    if isMATLABReleaseOlderThan("R2020a")
+    if isMATLABReleaseOlderThan("R2020a") || options.Regacy
         fig.PaperPositionMode = 'auto';
         fig_pos = fig.PaperPosition;
         fig.PaperSize = 1.0 * [fig_pos(3) fig_pos(4)];
@@ -47,7 +48,7 @@ function saveFigure(foldername, filename, options)
         print(fig, char(fullfilename), '-dpng');
     else
         exportgraphics(fig, sprintf("%s.png",fullfilename))
-        exportgraphics(fig, sprintf("%s.pdf",fullfilename),'ContentType','vector')
+        exportgraphics(fig, sprintf("%s.pdf",fullfilename),"ContentType","vector")
     end
     savefig(fig, char(fullfilename));
 end

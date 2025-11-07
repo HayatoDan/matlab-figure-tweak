@@ -106,3 +106,8 @@ saveFigure('AutoSave','yes');
 `saveFigure('AutoSave','yes')`でセーブするか確認せずに図を保存する．
 同名のファイルがある場合に上書きするので注意．
 
+#### Regacy
+`saveFigure('Regacy',true)`でレガシーモード（`exportgraphics`を使わないモード）に切り替え．
+
+`exportgraphics`で生成したpdfは縦横サイズが勝手に調整されてしまうので，それが嫌な場合はこちらを使う．
+
